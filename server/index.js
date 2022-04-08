@@ -50,4 +50,9 @@ app.get("/api/motivation", (req, res) => {
     res.status(200).send(randomMotivation);
 });
 
+app.post("", (req, res) => {})
+
+app.put("", (req, res) => {})
+
+app.delete("", (req, res) => {})
 app.listen(4000, () => console.log("Server running on 4000"));

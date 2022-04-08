@@ -36,4 +36,18 @@ app.get("/api/fortune", (req, res) => {
     res.status(200).send(randomFortune);
 });
 
+app.get("/api/motivation", (req, res) => {
+    const quotes = ['“We cannot solve problems with the kind of thinking we employed when we came up with them.” — Albert Einstein',
+        '“Learn as if you will live forever, live like you will die tomorrow.” — Mahatma Gandhi',
+        '"Success is not final; failure is not fatal: It is the courage to continue that counts." — Winston S. Churchill',
+        '“I never dreamed about success. I worked for it.” —Estée Lauder',
+    ];
+
+    //choose random fortune
+    let randomIndex = Math.floor(Math.random() * quotes.length);
+    let randomMotivation = quotes[randomIndex];
+
+    res.status(200).send(randomMotivation);
+});
+
 app.listen(4000, () => console.log("Server running on 4000"));

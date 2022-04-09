@@ -52,26 +52,35 @@ app.get("/api/motivation", (req, res) => {
 
 app.post("/api/goals", (req, res) => {
     const motivationGoals = req.body;
-    if (!goals) {
+    if (!motivationGoals) {
         res.status(400).send("Looks like you forgot to type your goal. Go ahead and try again.")
     } else {
         goalsDatabase.push(req.body)
-        res.status(200).send(req.body)
+        res.status(200).send(`Your new goal is ${motivationGoals}`)
     }
-    return
 })
 
 app.put("/api/goals", (req, res) => {
     let existingGoals = req.params.goals
     let newGoal = req.body.goals
-    res.status(200).send("Goal updated!")
+    for (let i = 0; i < goals.length; i++) {
+        if (goal[i].goals === existingGoals) {
+            goal[i].goals = newGoal
+            res.status(200).send("Goal updated!")
+        }
+    }
+    res.status(400).send("Goal not found.")
 })
 
 app.delete("/api/goals", (req, res) => {
     let existingGoals = req.params.goals
-    goals.splice(goals, 1)
-    res.status(200).send("Goal deleted.")
-
+    for (let i = 0; i < goals.length; i++) {
+        if (goal[i].goals === existingGoals) {
+            goals.splice(i, 1)
+            return
+        }
+    }
+    res.status(400).send('Goal not found.')
 })
 
 // Do not forget to run the node server index.js commd to get the website running

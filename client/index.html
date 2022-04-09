@@ -12,6 +12,7 @@
 
     <label for="goals">Goals:</label>
     <input type="text" id="goals" name="goals">
+    <input type="submit" value="Submit">
     <button id="updateGoal">Update your goal</button>
     <button id="delete">Clear Goals</button>
 
@@ -43,7 +44,7 @@
 
         axios.post('/api/goals', goals).then(...)
         axios.put('/api/goals')
-        axios.delete("/api/goals/delete").then(...)
+        axios.delete("/api/goals").then(...)
     </script>
 </body>
 

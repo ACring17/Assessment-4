@@ -50,9 +50,29 @@ app.get("/api/motivation", (req, res) => {
     res.status(200).send(randomMotivation);
 });
 
-app.post("", (req, res) => {})
+app.post("/api/goals", (req, res) => {
+    const motivationGoals = req.body;
+    if (!goals) {
+        res.status(400).send("Looks like you forgot to type your goal. Go ahead and try again.")
+    } else {
+        goalsDatabase.push(req.body)
+        res.status(200).send(req.body)
+    }
+    return
+})
 
-app.put("", (req, res) => {})
+app.put("/api/goals", (req, res) => {
+    let existingGoals = req.params.goals
+    let newGoal = req.body.goals
+    res.status(200).send("Goal updated!")
+})
 
-app.delete("", (req, res) => {})
+app.delete("/api/goals", (req, res) => {
+    let existingGoals = req.params.goals
+    goals.splice(goals, 1)
+    res.status(200).send("Goal deleted.")
+
+})
+
+// Do not forget to run the node server index.js commd to get the website running
 app.listen(4000, () => console.log("Server running on 4000"));

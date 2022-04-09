@@ -12,6 +12,7 @@
 
     <label for="goals">Goals:</label>
     <input type="text" id="goals" name="goals">
+    <button id="updateGoal">Update your goal</button>
     <button id="delete">Clear Goals</button>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -39,6 +40,10 @@
                     alert(data);
                 });
         };
+
+        axios.post('/api/goals', goals).then(...)
+        axios.put('/api/goals')
+        axios.delete("/api/goals/delete").then(...)
     </script>
 </body>
 

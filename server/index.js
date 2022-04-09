@@ -85,5 +85,5 @@ app.delete("/api/goals/:id", (req, res) => {
     res.status(400).send('Goal not found.')
 })
 
-// Do not forget to run the node server index.js commd to get the website running
+
 app.listen(4000, () => console.log("Server running on 4000"));

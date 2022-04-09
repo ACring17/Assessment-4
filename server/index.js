@@ -8,6 +8,8 @@ app.use(cors());
 
 app.use(express.json()); // When we want to be able to accept JSON.
 
+let goalsDatabase = []
+
 app.get("/api/compliment", (req, res) => {
     const compliments = ["Gee, you're a smart cookie!",
         "Cool shirt!",
@@ -56,28 +58,28 @@ app.post("/api/goals", (req, res) => {
         res.status(400).send("Looks like you forgot to type your goal. Go ahead and try again.")
     } else {
         goalsDatabase.push(req.body)
-        res.status(200).send(`Your new goal is ${motivationGoals}`)
+        res.status(200).send(goalsDatabase)
     }
 })
 
-app.put("/api/goals", (req, res) => {
-    let existingGoals = req.params.goals
+app.put("/api/goals/:id", (req, res) => {
+    let existingGoals = +req.params.goalsDatabase
     let newGoal = req.body.goals
-    for (let i = 0; i < goals.length; i++) {
-        if (goal[i].goals === existingGoals) {
-            goal[i].goals = newGoal
-            res.status(200).send("Goal updated!")
+    for (let i = 0; i < goalsDatabase.length; i++) {
+        if (goalsDatabase[i].goals === existingGoals) {
+            goalsDatabase[i].goals = newGoal
+            res.status(200).send(goalsDatabase)
         }
     }
     res.status(400).send("Goal not found.")
 })
 
-app.delete("/api/goals", (req, res) => {
-    let existingGoals = req.params.goals
-    for (let i = 0; i < goals.length; i++) {
-        if (goal[i].goals === existingGoals) {
-            goals.splice(i, 1)
-            return
+app.delete("/api/goals/:id", (req, res) => {
+    let existingGoals = +req.params.goalsDatabase
+    for (let i = 0; i < goalsDatabase.length; i++) {
+        if (goalsDatabase[i].goals === existingGoals) {
+            goalsDatabase.splice(i, 1)
+            return res.status(200).send(goalsDatabase)
         }
     }
     res.status(400).send('Goal not found.')
